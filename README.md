@@ -4,7 +4,7 @@ My _code-along_ of the official [React Tutorial](https://reactjs.org/tutorial/tu
 
 ## Notes
 
-- Pass data through `props`
+- We pass data to Components through `props`
 
 ```jsx
 <MyComponent name="foobar" />;
@@ -37,4 +37,35 @@ class MyComponent extends React.Component {
 }
 
 // Now, name refers to an internal state instead of a passed prop.
+```
+
+- In React, We use `setState` instead of _mutating_ `this.state` directly.
+
+```jsx
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: "foo"
+    };
+  }
+
+  render() {
+    return (
+      <h1 onClick={() => this.setState({ name: "bar" })}>
+        Hello, {this.props.name}!
+      </h1>
+    );
+  }
+}
+/** <h1>Hello, bar!</h1> */
+```
+
+- If a Component doesn't maintain its own state, it could be simplified to a functional component.
+
+```jsx
+function MyFunctionalComponent(props) {
+  return <h1>Hello, {props.name}!</h1>;
+}
 ```
